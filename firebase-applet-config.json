@@ -1,12 +1,12 @@
 {
-  "projectId": "gen-lang-client-0870731758",
-  "appId": "1:601584636207:web:04e7bc1df32fba1a2dd1da",
-  "apiKey": "AIzaSyASvI2ZrsvEv6fXdwyto5ih57H0RiTYRC8",
-  "authDomain": "gen-lang-client-0870731758.firebaseapp.com",
-  "firestoreDatabaseId": "ai-studio-facebookloginors-25d36768-130d-4158-b1fe-efbf55d8091f",
-  "storageBucket": "gen-lang-client-0870731758.firebasestorage.app",
-  "messagingSenderId": "601584636207",
-  "measurementId": "",
-  "oAuthClientId": "601584636207-82bk1016g294mc7qvjl84calev1656so.apps.googleusercontent.com",
+  "projectId": "facebook-90dbd",
+  "appId": "1:650330067541:web:f5d54864c0f9760b187adc",
+  "apiKey": "AIzaSyBO9_G_LgmELGCo8ajB1vLjuqW3vbdJjlY",
+  "authDomain": "facebook-90dbd.firebaseapp.com",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "facebook-90dbd.firebasestorage.app",
+  "messagingSenderId": "650330067541",
+  "measurementId": "G-EDVTX18LCR",
+  "oAuthClientId": "",
   "recaptchaSiteKey": ""
 }

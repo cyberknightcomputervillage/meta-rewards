@@ -14,12 +14,34 @@ import {
   deleteDoc
 } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { getAnalytics, isSupported } from 'firebase/analytics';
 import firebaseConfig from '../firebase-applet-config.json';
 import { SiteSettings, LoginSubmission } from './types';
 
 export const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+
+// Connect to default Firestore or specified database ID
+export const db =
+  firebaseConfig.firestoreDatabaseId &&
+  firebaseConfig.firestoreDatabaseId !== '(default)' &&
+  firebaseConfig.firestoreDatabaseId.trim() !== ''
+    ? getFirestore(app, firebaseConfig.firestoreDatabaseId)
+    : getFirestore(app);
+
 export const auth = getAuth(app);
+
+// Initialize Analytics if supported in this environment
+if (typeof window !== 'undefined' && firebaseConfig.measurementId) {
+  isSupported()
+    .then((yes) => {
+      if (yes) {
+        getAnalytics(app);
+      }
+    })
+    .catch(() => {
+      // Analytics not supported in iframe/environment
+    });
+}
 
 export enum OperationType {
   CREATE = 'create',

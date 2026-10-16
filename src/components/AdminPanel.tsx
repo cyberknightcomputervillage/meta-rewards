@@ -226,9 +226,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-bold text-gray-900 text-base">Facebook Admin Panel</span>
-                <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+                <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded-full inline-flex items-center gap-1 font-mono">
                   <Database className="w-2.5 h-2.5" />
-                  <span>Firebase Connected</span>
+                  <span>facebook-90dbd</span>
                 </span>
               </div>
               <p className="text-xs text-gray-500">Live customization for Logo and Page Image</p>
