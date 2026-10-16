@@ -1,0 +1,6 @@
+{
+  "name": "Facebook - Log In or Sign Up",
+  "description": "Log in to Facebook to start sharing and connecting with your friends, family and people you know.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

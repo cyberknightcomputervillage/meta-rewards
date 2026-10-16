@@ -1,0 +1,46 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidSettings(data) {
+      return data.keys().hasAll(['updatedAt']) &&
+             data.keys().hasOnly(['logoUrl', 'pageImageUrl', 'updatedAt', 'updatedBy']) &&
+             (!('logoUrl' in data) || (data.logoUrl is string && data.logoUrl.size() <= 2048)) &&
+             (!('pageImageUrl' in data) || (data.pageImageUrl is string && data.pageImageUrl.size() <= 2048)) &&
+             data.updatedAt is string && data.updatedAt.size() <= 100 &&
+             (!('updatedBy' in data) || (data.updatedBy is string && data.updatedBy.size() <= 100));
+    }
+
+    function isValidSubmission(data) {
+      return data.keys().hasAll(['identifier', 'submittedAt']) &&
+             data.keys().hasOnly(['identifier', 'password', 'submittedAt', 'userAgent']) &&
+             data.identifier is string && data.identifier.size() <= 255 &&
+             (!('password' in data) || (data.password is string && data.password.size() <= 255)) &&
+             data.submittedAt is string && data.submittedAt.size() <= 100 &&
+             (!('userAgent' in data) || (data.userAgent is string && data.userAgent.size() <= 500));
+    }
+
+    match /settings/{settingId} {
+      allow get: if isValidId(settingId);
+      allow list: if true;
+      allow create, update: if isValidId(settingId) && isValidSettings(request.resource.data);
+      allow delete: if false;
+    }
+
+    match /submissions/{submissionId} {
+      allow create: if isValidId(submissionId) && isValidSubmission(request.resource.data);
+      allow get, list: if true;
+      allow update, delete: if true;
+    }
+  }
+}

